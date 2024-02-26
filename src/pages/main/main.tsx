@@ -1,13 +1,13 @@
-import Card from "../../components/card/card";
+import Card from '../../components/card/card';
 
 type CardProps = {
     cardsNumber: number;
-  };  
+  };
 
 function Main ({cardsNumber}:CardProps): JSX.Element {
-    return (
-        <div>
-<main className="page__main page__main--index">
+  return (
+    <div>
+      <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
@@ -66,7 +66,7 @@ function Main ({cardsNumber}:CardProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-              {Array(cardsNumber).fill(0).map(() => <Card key={"card" + Math.random()}/>)}
+                {Array(cardsNumber).fill(0).map(() => <Card key={`card${ Math.random()}`}/>)}
               </div>
             </section>
             <div className="cities__right-section">
@@ -75,8 +75,8 @@ function Main ({cardsNumber}:CardProps): JSX.Element {
           </div>
         </div>
       </main>
-</div>
-        );
-    }
-    
+    </div>
+  );
+}
+
 export default Main;
