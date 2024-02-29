@@ -1,0 +1,28 @@
+.notFoundBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.heading {
+  font-family: "Rubik", arial, sans-serif;
+  margin: 30px auto;
+  margin-bottom: 0;
+  color: #383838;
+  font-size: 24px;
+}
+
+.regularText {
+  font-family: "Rubik", arial, sans-serif;
+  color: #383838;
+  margin: 15px auto;
+}
+
+.button {
+  font-family: "Rubik", arial, sans-serif;
+  margin: 0 auto;
+  padding: 10px 30px;
+  color: #fff;
+  background-color: #4481c3;
+  border-radius: 3px;
+}
