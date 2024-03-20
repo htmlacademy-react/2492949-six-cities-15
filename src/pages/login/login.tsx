@@ -1,5 +1,5 @@
-import Logo from '../../components/logo/logo';
 import { Helmet } from 'react-helmet-async';
+import Header from '../../components/header/header';
 
 function Login(): JSX.Element {
   return (
@@ -7,15 +7,7 @@ function Login(): JSX.Element {
       <Helmet>
         <title>Шесть городов. Вход</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
