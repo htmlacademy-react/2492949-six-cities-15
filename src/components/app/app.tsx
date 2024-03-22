@@ -7,26 +7,24 @@ import NotFound from '../../pages/not-found/not-found';
 import Offer from '../../pages/offer/offer';
 import PrivateRoute from '../private-route/private-route.tsx';
 import { HelmetProvider } from 'react-helmet-async';
+import { TOffer } from '../../types/offers.ts';
 
 type CardProps = {
-  cardsNumber: number;
+  offers: TOffer[];
 };
 
-function App({ cardsNumber }: CardProps): JSX.Element {
+function App({ offers }: CardProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route
-            path={AppRoute.Main}
-            element={<Main cardsNumber={cardsNumber} />}
-          />
+          <Route path={AppRoute.Main} element={<Main offersData={offers} />} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                <Favorites />
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                <Favorites offersData={offers} />
               </PrivateRoute>
             }
           />
