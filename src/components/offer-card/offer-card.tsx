@@ -9,17 +9,14 @@ type CardProps = {
   page: string;
 };
 
-const Card = ({ offersData, onMouseEnter, onMouseLeave, page }: CardProps) => {
-  const {
-    title,
-    id,
-    isFavorite,
-    isPremium,
-    previewImage,
-    price,
-    rating,
-    type,
-  } = offersData;
+const OfferCard = ({
+  offersData,
+  onMouseEnter,
+  onMouseLeave,
+  page,
+}: CardProps) => {
+  const { title, isFavorite, isPremium, previewImage, price, rating, type } =
+    offersData;
   const ratingPercent: string = `${Math.round(+rating) * 20}%`;
 
   return (
@@ -29,7 +26,6 @@ const Card = ({ offersData, onMouseEnter, onMouseLeave, page }: CardProps) => {
           ? 'favorites__card place-card'
           : 'near-places__card place-card'
       }
-      data-id={id}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -96,4 +92,4 @@ const Card = ({ offersData, onMouseEnter, onMouseLeave, page }: CardProps) => {
   );
 };
 
-export default Card;
+export default OfferCard;

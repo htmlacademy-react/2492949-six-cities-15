@@ -11,7 +11,7 @@ const rating = [
 
 function ReviewsForm(): JSX.Element {
   const [review, setReview] = useState({ rating: 0, review: '' });
-  const HandleChange: TChangeHandler = (event) => {
+  const handleChange: TChangeHandler = (event) => {
     const { name, value } = event.currentTarget;
     setReview({ ...review, [name]: value });
   };
@@ -29,7 +29,7 @@ function ReviewsForm(): JSX.Element {
               defaultValue={value}
               id={`${value}-stars"`}
               type="radio"
-              onChange={HandleChange}
+              onChange={handleChange}
             />
             <label
               htmlFor={`${value}-stars"`}
@@ -48,10 +48,9 @@ function ReviewsForm(): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={HandleChange}
+        onChange={handleChange}
         defaultValue={''}
-      >
-      </textarea>
+      ></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set{' '}

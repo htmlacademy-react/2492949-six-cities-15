@@ -1,5 +1,5 @@
-import ReviewsList from './reviews-list';
-import ReviewsForm from './reviews-form';
+import ReviewsList from '../reviews-list/reviews-list';
+import ReviewsForm from '../reviews-form/reviews-form';
 
 type TReviewsProps = {
   isAuth: boolean;
