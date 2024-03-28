@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TOffer } from '../../types/offers';
 import { OffersBlock } from '../offers-block/offers-block';
+import { Map } from '../map/map';
 
 type TOffersListProps = {
   offersData: TOffer[];
@@ -16,7 +17,7 @@ export function OffersList({ offersData }: TOffersListProps): JSX.Element {
     setActiveOfferId(null);
   }
   return (
-    <div>
+    <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">
@@ -54,7 +55,8 @@ export function OffersList({ offersData }: TOffersListProps): JSX.Element {
         />
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map" data-id={activeOfferId}></section>
+        <Map offers={offersData} activeOfferId={activeOfferId} />
+        {/* <section className="cities__map map" data-id={activeOfferId}></section> */}
       </div>
     </div>
   );

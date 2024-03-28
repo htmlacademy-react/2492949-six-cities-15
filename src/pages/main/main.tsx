@@ -9,6 +9,8 @@ type TPlacesToStay = {
 };
 
 function Main({ offersData }: TPlacesToStay): JSX.Element {
+  const cityName = offersData[0].city.name;
+  const cityOffers = offersData.filter((item) => item.city.name === cityName);
   return (
     <div>
       <Helmet>
@@ -31,12 +33,7 @@ function Main({ offersData }: TPlacesToStay): JSX.Element {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <OffersList offersData={offersData} />
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
-          </div>
+          <OffersList offersData={cityOffers} />
         </div>
       </main>
     </div>
