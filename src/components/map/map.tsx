@@ -8,6 +8,7 @@ import useMap from '../../hooks/use-map';
 type TMapProps = {
   offers: TOffer[];
   activeOfferId?: string | null;
+  page: string;
 };
 
 const defaultMarkerIcon = leaflet.icon({
@@ -22,7 +23,7 @@ const activeMarkerIcon = leaflet.icon({
   iconAnchor: [20, 40],
 });
 
-export function Map({ offers, activeOfferId }: TMapProps): JSX.Element {
+export function Map({ offers, activeOfferId, page }: TMapProps): JSX.Element {
   const mapRef = useRef(null);
   const city = offers[0].city;
   const map = useMap(mapRef);
@@ -61,5 +62,10 @@ export function Map({ offers, activeOfferId }: TMapProps): JSX.Element {
     }
   }, [activeOfferId, map, offers]);
 
-  return <section ref={mapRef} className="cities__map map"></section>;
+  return (
+    <section
+      ref={mapRef}
+      className={page === 'offer' ? 'offer__map map' : 'cities__map map'}
+    ></section>
+  );
 }
