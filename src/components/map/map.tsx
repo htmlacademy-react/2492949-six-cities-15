@@ -66,6 +66,7 @@ export function Map({ offers, activeOfferId, page }: TMapProps): JSX.Element {
     <section
       ref={mapRef}
       className={page === 'offer' ? 'offer__map map' : 'cities__map map'}
-    ></section>
+    >
+    </section>
   );
 }
