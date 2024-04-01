@@ -1,16 +1,24 @@
 import { Helmet } from 'react-helmet-async';
 import { CITIES } from '../../consts';
-import { TOffer } from '../../types/offers';
 import { OffersList } from '../../components/offers-list/offers-list';
 import Header from '../../components/header/header';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import CitiesItem from '../../components/cities-item/cities-item';
+import { TCityName } from '../../types/offers';
+import { changeCity } from '../../store/action';
 
-type TPlacesToStay = {
-  offersData: TOffer[];
-};
+function Main(): JSX.Element {
+  const cityName = useAppSelector((state) => state.city);
+  const cityOffers = useAppSelector((state) => state.offers).filter(
+    (item) => item.city.name === cityName
+  );
+  const dispatch = useAppDispatch();
+  const handleCityClick = (isSelected: boolean, newCity: TCityName) => {
+    if (!isSelected) {
+      dispatch(changeCity({ city: newCity }));
+    }
+  };
 
-function Main({ offersData }: TPlacesToStay): JSX.Element {
-  const cityName = offersData[0].city.name;
-  const cityOffers = offersData.filter((item) => item.city.name === cityName);
   return (
     <div>
       <Helmet>
@@ -22,18 +30,19 @@ function Main({ offersData }: TPlacesToStay): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {CITIES.map((title: string) => (
-                <li className="locations__item" key={title}>
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>{title}</span>
-                  </a>
-                </li>
+              {CITIES.map((item) => (
+                <CitiesItem
+                  key={item}
+                  isActive={item === cityName}
+                  name={item}
+                  onClick={handleCityClick}
+                />
               ))}
             </ul>
           </section>
         </div>
         <div className="cities">
-          <OffersList offersData={cityOffers} />
+          <OffersList offersData={cityOffers} activeCity={cityName} />
         </div>
       </main>
     </div>

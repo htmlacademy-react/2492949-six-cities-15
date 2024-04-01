@@ -2,12 +2,17 @@ import { useState } from 'react';
 import { TOffer } from '../../types/offers';
 import { OffersBlock } from '../offers-block/offers-block';
 import { Map } from '../map/map';
+import { TCityName } from '../../types/offers';
 
 type TOffersListProps = {
   offersData: TOffer[];
+  activeCity: TCityName;
 };
 
-export function OffersList({ offersData }: TOffersListProps): JSX.Element {
+export function OffersList({
+  offersData,
+  activeCity,
+}: TOffersListProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
   function handleMouseEnter(id: string) {
     setActiveOfferId(id);
@@ -21,7 +26,7 @@ export function OffersList({ offersData }: TOffersListProps): JSX.Element {
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">
-          {offersData.length} places to stay in Amsterdam
+          {offersData.length} places to stay in {activeCity}
         </b>
         <form className="places__sorting" action="#" method="get">
           <span className="places__sorting-caption">Sort by</span>
@@ -55,8 +60,12 @@ export function OffersList({ offersData }: TOffersListProps): JSX.Element {
         />
       </section>
       <div className="cities__right-section">
-        <Map offers={offersData} activeOfferId={activeOfferId} page="main" />
-        {/* <section className="cities__map map" data-id={activeOfferId}></section> */}
+        <Map
+          offers={offersData}
+          activeOfferId={activeOfferId}
+          page="main"
+          activeCity={activeCity}
+        />
       </div>
     </div>
   );
