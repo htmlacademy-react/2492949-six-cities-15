@@ -1,36 +1,29 @@
 export const REVIEWS = [
   {
-    id: 'b67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
-    date: '2019-05-08T14:13:56.569Z',
-    user: {
-      name: 'Oliver Conner',
-      avatarUrl: 'img/avatar-max.jpg',
-      isPro: false,
-    },
-    comment:
-      'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-    rating: 4,
-  },
-  {
-    id: 'b67ddfd5-b953-8c8d-bd083cd6b62a',
-    date: '2017-09-08T14:14:56.569Z',
-    user: {
-      name: 'Petr Ivanov',
-      avatarUrl: 'img/avatar-max.jpg',
-      isPro: true,
-    },
-    comment: 'This is wonderful.',
+    id: '12345',
+    date: '2022-07-22T17:00:00.000Z',
+    name: 'Elizabeth',
+    avatarURL: 'img/avatar-max.jpg',
+    review:
+      'An amazing place with all the necessities, we had a great time staying here.',
     rating: 5,
   },
   {
-    id: 'b67ddfd5-b953-4a30-8c8d',
-    date: '2018-08-08T14:13:56.569Z',
-    user: {
-      name: 'Jane Austin',
-      avatarUrl: 'img/avatar-max.jpg',
-      isPro: false,
-    },
-    comment: 'Wonderful views.',
+    id: '4567',
+    date: '2022-01-22T13:17:15.000Z',
+    name: 'Matt',
+    avatarURL: 'img/avatar-max.jpg',
+    review:
+      'Wonderful location and apartment. I’ll book it again next time 100%.',
+    rating: 5,
+  },
+  {
+    id: '56789',
+    date: '2023-04-05T20:11:24.000Z',
+    name: 'Sonja',
+    avatarURL: 'img/avatar-max.jpg',
+    review:
+      'Found this place last minute, the host is friendly, the apartment is clean and well-equipped. Really enjoyed our stay here.',
     rating: 5,
   },
 ];

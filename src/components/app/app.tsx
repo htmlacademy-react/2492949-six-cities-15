@@ -28,7 +28,10 @@ function App({ offers }: CardProps): JSX.Element {
               </PrivateRoute>
             }
           />
-          <Route path={AppRoute.Offer} element={<Offer />} />
+          <Route
+            path={AppRoute.Offer}
+            element={<Offer offersData={offers} />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

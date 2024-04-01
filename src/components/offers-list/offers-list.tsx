@@ -55,7 +55,7 @@ export function OffersList({ offersData }: TOffersListProps): JSX.Element {
         />
       </section>
       <div className="cities__right-section">
-        <Map offers={offersData} activeOfferId={activeOfferId} />
+        <Map offers={offersData} activeOfferId={activeOfferId} page="main" />
         {/* <section className="cities__map map" data-id={activeOfferId}></section> */}
       </div>
     </div>

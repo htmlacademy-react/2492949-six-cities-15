@@ -1,5 +1,6 @@
 import ReviewsList from '../reviews-list/reviews-list';
 import ReviewsForm from '../reviews-form/reviews-form';
+import { REVIEWS } from '../../mocks/reviews';
 
 type TReviewsProps = {
   isAuth: boolean;
@@ -8,7 +9,7 @@ type TReviewsProps = {
 function Reviews({ isAuth }: TReviewsProps): JSX.Element {
   return (
     <section className="offer__reviews reviews">
-      <ReviewsList />
+      <ReviewsList reviews={REVIEWS} />
       {isAuth && <ReviewsForm />}
       {!isAuth && (
         <p>Только авторизованные пользовател могут оставлять комментарии</p>
