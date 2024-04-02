@@ -1,4 +1,5 @@
-import { PLACES, LivingTypes } from '../consts';
+import { PLACES, LivingTypes, CITIES } from '../consts';
+import { store } from '../store';
 
 export type TLocation = {
   latitude: number;
@@ -40,3 +41,12 @@ export type THost = {
   isPro: boolean;
   id: number;
 };
+
+export type TCityName = (typeof CITIES)[number];
+
+export type TState = {
+  city: TCityName;
+  offers: TOffer[];
+};
+
+export type TAppDispatch = typeof store.dispatch;

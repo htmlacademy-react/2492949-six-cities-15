@@ -118,7 +118,7 @@ function Offer({ offersData }: TOfferProps): JSX.Element {
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
                   {goods?.map((item) => (
-                    <li className="offer__inside-item" key={`${item }name`}>
+                    <li className="offer__inside-item" key={`${item}name`}>
                       {item}
                     </li>
                   ))}

@@ -4,11 +4,14 @@ import 'leaflet/dist/leaflet.css';
 import { TOffer } from '../../types/offers';
 import { URL_MARKER_DEFAULT, URL_MARKER_ACTIVE } from '../../consts';
 import useMap from '../../hooks/use-map';
+import { TCityName } from '../../types/offers';
+import { CITIES_LOCATIONS } from '../../consts';
 
 type TMapProps = {
   offers: TOffer[];
   activeOfferId?: string | null;
   page: string;
+  activeCity?: TCityName;
 };
 
 const defaultMarkerIcon = leaflet.icon({
@@ -23,9 +26,15 @@ const activeMarkerIcon = leaflet.icon({
   iconAnchor: [20, 40],
 });
 
-export function Map({ offers, activeOfferId, page }: TMapProps): JSX.Element {
+export function Map({
+  offers,
+  activeOfferId,
+  page,
+  activeCity,
+}: TMapProps): JSX.Element {
   const mapRef = useRef(null);
-  const city = offers[0].city;
+  const city = CITIES_LOCATIONS.find((item) => item.name === activeCity);
+
   const map = useMap(mapRef);
 
   useEffect(() => {
