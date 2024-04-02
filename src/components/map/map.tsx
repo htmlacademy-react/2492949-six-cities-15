@@ -11,7 +11,7 @@ type TMapProps = {
   offers: TOffer[];
   activeOfferId?: string | null;
   page: string;
-  activeCity: TCityName;
+  activeCity?: TCityName;
 };
 
 const defaultMarkerIcon = leaflet.icon({
@@ -33,7 +33,6 @@ export function Map({
   activeCity,
 }: TMapProps): JSX.Element {
   const mapRef = useRef(null);
-  // const city = offers[0].city;
   const city = CITIES_LOCATIONS.find((item) => item.name === activeCity);
 
   const map = useMap(mapRef);
