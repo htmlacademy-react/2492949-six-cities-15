@@ -11,9 +11,9 @@ export function OffersSorting({
 }: TOffersListProps): JSX.Element {
   const [isOpened, setOpened] = useState(false);
 
-  function chooseSortingType(e: React.ChangeEvent<HTMLInputElement>) {
+  function chooseSortingType(type: string) {
     setOpened(!isOpened);
-    setSortingType(e.target.id);
+    setSortingType(type);
   }
 
   return (
@@ -39,7 +39,7 @@ export function OffersSorting({
             }
             tabIndex={0}
             id="Popular"
-            onClick={chooseSortingType}
+            onClick={() => chooseSortingType('Popular')}
           >
             Popular
           </li>
@@ -51,7 +51,7 @@ export function OffersSorting({
             }
             tabIndex={0}
             id="Price: low to high"
-            onClick={chooseSortingType}
+            onClick={() => chooseSortingType('Price: low to high')}
           >
             Price: low to high
           </li>
@@ -63,7 +63,7 @@ export function OffersSorting({
             }
             tabIndex={0}
             id="Price: high to low"
-            onClick={chooseSortingType}
+            onClick={() => chooseSortingType('Price: high to low')}
           >
             Price: high to low
           </li>
@@ -75,7 +75,7 @@ export function OffersSorting({
             }
             tabIndex={0}
             id="Top rated first"
-            onClick={chooseSortingType}
+            onClick={() => chooseSortingType('Top rated first')}
           >
             Top rated first
           </li>
