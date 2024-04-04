@@ -26,14 +26,7 @@ function App(): JSX.Element {
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Main} element={<Main offers={offers} />} />
-          <Route
-            path={AppRoute.Login}
-            element={
-              <PrivateRoute authorizationStatus={authStatus}>
-                <Login />
-              </PrivateRoute>
-            }
-          />
+          <Route path={AppRoute.Login} element={<Login />} />
           <Route
             path={AppRoute.Favorites}
             element={

@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../consts';
+import { HeaderNav } from '../header-nav/header-nav';
 
 function Header(): JSX.Element {
   const currentPath = useLocation().pathname;
@@ -26,21 +27,7 @@ function Header(): JSX.Element {
               />
             </Link>
           </div>
-          {currentPath !== AppRoute.Login && (
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <Link
-                    className="header__nav-link header__nav-link--profile"
-                    to={AppRoute.Login}
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__login">Sign in</span>
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          )}
+          {currentPath !== AppRoute.Login && <HeaderNav />}
         </div>
       </div>
     </header>

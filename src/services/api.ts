@@ -1,10 +1,5 @@
 import { getToken } from './token';
-import axios, {
-  AxiosInstance,
-  InternalAxiosRequestConfig,
-  AxiosResponse,
-  AxiosError,
-} from 'axios';
+import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import { StatusCodes } from 'http-status-codes';
 import { processErrorHandle } from './process-error-handle';
 
@@ -31,10 +26,10 @@ export const createAPI = (): AxiosInstance => {
     timeout: REQUEST_TIMEOUT,
   });
 
-  api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+  api.interceptors.request.use((config) => {
     const token = getToken();
     if (token && config.headers) {
-      config.headers['x-token'] = token;
+      config.headers['X-token'] = token;
     }
     return config;
   });
@@ -44,7 +39,6 @@ export const createAPI = (): AxiosInstance => {
     (error: AxiosError<DetailMessageType>) => {
       if (error.response && shouldDisplayError(error.response)) {
         const detailMessage = error.response.data;
-
         processErrorHandle(detailMessage.message);
       }
 
