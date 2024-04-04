@@ -7,6 +7,13 @@ export const AppRoute = {
   Offer: '/offer/:id',
 } as const;
 
+export enum APIRoute {
+  Offers = '/offers',
+  Favorite = '/favorite',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -116,3 +123,5 @@ export const CITIES_LOCATIONS: TCity[] = [
 
 export const URL_MARKER_DEFAULT = '/img/pin.svg';
 export const URL_MARKER_ACTIVE = '/img/pin-active.svg';
+
+export const TIMEOUT_SHOW_ERROR = 2000;

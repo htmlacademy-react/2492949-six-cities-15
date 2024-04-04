@@ -1,5 +1,7 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../consts.ts';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
+import { AppRoute } from '../../consts.ts';
 import Main from '../../pages/main/main';
 import Favorites from '../../pages/favourites/favourites';
 import Login from '../../pages/login/login';
@@ -7,23 +9,35 @@ import NotFound from '../../pages/not-found/not-found';
 import Offer from '../../pages/offer/offer';
 import PrivateRoute from '../private-route/private-route.tsx';
 import { HelmetProvider } from 'react-helmet-async';
-import { TOffer } from '../../types/offers.ts';
+import { fetchAllOffers } from '../../store/thunks/offers.ts';
 
-type CardProps = {
-  offers: TOffer[];
-};
+function App(): JSX.Element {
+  const dispatch = useAppDispatch();
 
-function App({ offers }: CardProps): JSX.Element {
+  useEffect(() => {
+    dispatch(fetchAllOffers());
+  }, [dispatch]);
+
+  const offers = useAppSelector((state) => state.offers);
+  const authStatus = useAppSelector((state) => state.authorizationStatus);
+
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Main} element={<Main />} />
-          <Route path={AppRoute.Login} element={<Login />} />
+          <Route path={AppRoute.Main} element={<Main offers={offers} />} />
+          <Route
+            path={AppRoute.Login}
+            element={
+              <PrivateRoute authorizationStatus={authStatus}>
+                <Login />
+              </PrivateRoute>
+            }
+          />
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <PrivateRoute authorizationStatus={authStatus}>
                 <Favorites offersData={offers} />
               </PrivateRoute>
             }
