@@ -4,20 +4,32 @@ import { OffersList } from '../../components/offers-list/offers-list';
 import Header from '../../components/header/header';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import CitiesItem from '../../components/cities-item/cities-item';
-import { TCityName } from '../../types/offers';
+import { TCityName, TOffer } from '../../types/offers';
 import { changeCity } from '../../store/action';
+import Spinner from '../../components/spinner/spinner';
 
-function Main(): JSX.Element {
+type TMainProps = {
+  offers: TOffer[];
+};
+
+function Main({ offers }: TMainProps): JSX.Element {
   const cityName = useAppSelector((state) => state.city);
-  const cityOffers = useAppSelector((state) => state.offers).filter(
-    (item) => item.city.name === cityName
+  const cityOffers = offers.filter((offer) => offer.city.name === cityName);
+
+  const isOffersDataLoading = useAppSelector(
+    (state) => state.isOffersDataLoading
   );
+
   const dispatch = useAppDispatch();
   const handleCityClick = (isSelected: boolean, newCity: TCityName) => {
     if (!isSelected) {
       dispatch(changeCity({ city: newCity }));
     }
   };
+
+  if (isOffersDataLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div>
@@ -41,9 +53,11 @@ function Main(): JSX.Element {
             </ul>
           </section>
         </div>
-        <div className="cities">
+        {isOffersDataLoading ? (
+          <Spinner />
+        ) : (
           <OffersList offersData={cityOffers} activeCity={cityName} />
-        </div>
+        )}
       </main>
     </div>
   );

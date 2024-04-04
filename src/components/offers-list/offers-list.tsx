@@ -28,30 +28,32 @@ export function OffersList({
   const sortedOffers = getSortedOffers(offersData, sortingType);
 
   return (
-    <div className="cities__places-container container">
-      <section className="cities__places places">
-        <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">
-          {offersData.length} places to stay in {activeCity}
-        </b>
-        <OffersSorting
-          setSortingType={setSortingType}
-          sortingType={sortingType}
-        />
-        <OffersBlock
-          offers={sortedOffers}
-          handleMouseEnter={handleMouseEnter}
-          handleMouseLeave={handleMouseLeave}
-          page="offers"
-        />
-      </section>
-      <div className="cities__right-section">
-        <Map
-          offers={offersData}
-          activeOfferId={activeOfferId}
-          page="main"
-          activeCity={activeCity}
-        />
+    <div className="cities">
+      <div className="cities__places-container container">
+        <section className="cities__places places">
+          <h2 className="visually-hidden">Places</h2>
+          <b className="places__found">
+            {offersData.length} places to stay in {activeCity}
+          </b>
+          <OffersSorting
+            setSortingType={setSortingType}
+            sortingType={sortingType}
+          />
+          <OffersBlock
+            offers={sortedOffers}
+            handleMouseEnter={handleMouseEnter}
+            handleMouseLeave={handleMouseLeave}
+            page="offers"
+          />
+        </section>
+        <div className="cities__right-section">
+          <Map
+            offers={offersData}
+            activeOfferId={activeOfferId}
+            page="main"
+            activeCity={activeCity}
+          />
+        </div>
       </div>
     </div>
   );
