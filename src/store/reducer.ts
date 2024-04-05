@@ -12,7 +12,7 @@ import { TState } from '../types/index';
 const initialState: TState = {
   city: CITIES[0],
   offers: [],
-  authorizationStatus: AuthorizationStatus.Unknown,
+  authorizationStatus: AuthorizationStatus.NoAuth,
   isOffersDataLoading: false,
   error: null,
 };
