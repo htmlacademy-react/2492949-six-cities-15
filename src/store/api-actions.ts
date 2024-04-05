@@ -1,11 +1,10 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppRoute, APIRoute, TIMEOUT_SHOW_ERROR } from '../consts';
-import { setError } from './action';
+// import { setError } from './action';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { saveToken, dropToken } from '../services/token';
-import { store } from '.';
 import { TOffer } from '../types/offers';
 
 // export const checkAuthAction = createAsyncThunk<
@@ -34,9 +33,9 @@ export const checkAuthAction = createAsyncThunk<
   return response.data;
 });
 
-export const clearErrorAction = createAsyncThunk('offers/clearError', () => {
-  setTimeout(() => store.dispatch(setError(null)), TIMEOUT_SHOW_ERROR);
-});
+// export const clearErrorAction = createAsyncThunk('offers/clearError', () => {
+//   setTimeout(() => store.dispatch(setError(null)), TIMEOUT_SHOW_ERROR);
+// });
 
 export const loginAction = createAsyncThunk<
   UserData,
