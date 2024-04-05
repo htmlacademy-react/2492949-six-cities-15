@@ -13,7 +13,7 @@ type TMainProps = {
 };
 
 function Main({ offers }: TMainProps): JSX.Element {
-  const cityName = useAppSelector((state) => state.city);
+  const cityName = useAppSelector((state) => state.offers.city);
   const cityOffers = offers.filter((offer) => offer.city.name === cityName);
 
   const isOffersDataLoading = useAppSelector(
@@ -21,6 +21,7 @@ function Main({ offers }: TMainProps): JSX.Element {
   );
 
   const dispatch = useAppDispatch();
+
   const handleCityClick = (isSelected: boolean, newCity: TCityName) => {
     if (!isSelected) {
       dispatch(changeCity({ city: newCity }));

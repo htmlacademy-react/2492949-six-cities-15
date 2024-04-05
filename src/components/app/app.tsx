@@ -13,13 +13,13 @@ import { fetchAllOffers } from '../../store/thunks/offers.ts';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
+  const authStatus = useAppSelector((state) => state.user.authStatus);
 
   useEffect(() => {
     dispatch(fetchAllOffers());
   }, [dispatch]);
 
   const offers = useAppSelector((state) => state.offers);
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
 
   return (
     <HelmetProvider>
@@ -36,7 +36,7 @@ function App(): JSX.Element {
             }
           />
           <Route
-            path={AppRoute.Offer}
+            path={`${AppRoute.Offer}/:offerId`}
             element={<Offer offersData={offers} />}
           />
           <Route path="*" element={<NotFound />} />

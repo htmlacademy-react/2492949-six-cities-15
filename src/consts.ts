@@ -4,7 +4,7 @@ export const AppRoute = {
   Main: '/',
   Login: '/login',
   Favorites: '/favorites',
-  Offer: '/offer/:id',
+  Offer: '/offer',
 } as const;
 
 export enum APIRoute {
