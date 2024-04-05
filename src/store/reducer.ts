@@ -1,3 +1,14 @@
+import { combineReducers } from '@reduxjs/toolkit';
+import userReducer from './slices/user';
+import offersReducer from './slices/offers';
+
+const rootReducer = combineReducers({
+  user: userReducer,
+  offers: offersReducer,
+});
+
+export default rootReducer;
+
 // import { createReducer } from '@reduxjs/toolkit';
 // import { CITIES, AuthorizationStatus } from '../consts';
 // import {
