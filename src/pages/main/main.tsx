@@ -39,12 +39,7 @@ function Main(): JSX.Element {
           <section className="locations container">
             <ul className="locations__list tabs__list">
               {CITIES.map((item) => (
-                <CitiesItem
-                  key={item}
-                  isActive={item === cityName}
-                  name={item}
-                  onClick={handleCityClick}
-                />
+                <CitiesItem key={item} name={item} />
               ))}
             </ul>
           </section>
