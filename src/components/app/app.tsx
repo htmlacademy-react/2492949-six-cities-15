@@ -19,7 +19,7 @@ function App(): JSX.Element {
     dispatch(fetchAllOffers());
   }, [dispatch]);
 
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.offers.offers);
 
   return (
     <HelmetProvider>

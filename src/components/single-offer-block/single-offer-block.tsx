@@ -4,18 +4,24 @@ import { TOffer } from '../../types/offers';
 
 type TSingleOffer = {
   currentOffer: TOffer;
+  offersNearby: TOffer[];
 };
 
-function SingleOfferBlock({ currentOffer }: TSingleOffer): JSX.Element {
+function SingleOfferBlock({
+  currentOffer,
+  offersNearby,
+}: TSingleOffer): JSX.Element {
   const images = currentOffer.images;
   const ratingPercent: string = `${Math.round(+currentOffer.rating) * 20}%`;
+  const activeCity = currentOffer.city;
+
   return (
     <section className="offer">
       <div className="offer__gallery-container container">
         <div className="offer__gallery">
           {images &&
             images.map((imageURL) => (
-              <div className="offer__image-wrapper">
+              <div className="offer__image-wrapper" key={`${imageURL}name`}>
                 <img
                   className="offer__image"
                   src={imageURL}
@@ -98,10 +104,15 @@ function SingleOfferBlock({ currentOffer }: TSingleOffer): JSX.Element {
               <p className="offer__text">{currentOffer.description}</p>
             </div>
           </div>
-          <Reviews isAuth />
+          <Reviews id={currentOffer.id} />
         </div>
       </div>
-      {/* <Map activeOfferId={currentOffer.id} page="offer" /> */}
+      <Map
+        activeOfferId={currentOffer.id}
+        page="offer"
+        offers={offersNearby}
+        activeCity={activeCity}
+      />
     </section>
   );
 }

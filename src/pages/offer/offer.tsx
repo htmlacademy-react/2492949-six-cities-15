@@ -19,7 +19,6 @@ function Offer(): JSX.Element {
   const loadingFailed = useAppSelector((state) => state.singleOffer.isFailed);
   const threeOffersNearby = offersNearby.slice(0, 3);
 
-  console.log(offerId);
   useEffect(() => {
     if (offerId) {
       dispatch(getOffer(offerId));
@@ -39,7 +38,10 @@ function Offer(): JSX.Element {
       <Header />
       {fetchStatus ? (
         <main className="page__main page__main--offer">
-          <SingleOfferBlock currentOffer={currentOffer} />
+          <SingleOfferBlock
+            currentOffer={currentOffer}
+            offersNearby={offersNearby}
+          />
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">

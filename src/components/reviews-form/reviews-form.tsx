@@ -1,8 +1,12 @@
 import { Fragment, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { submitReview } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks';
+import { getReviews, submitReview } from '../../store/api-actions';
 import { FormEvent } from 'react';
 import { ChangeEvent } from 'react';
+
+type TReviewsForm = {
+  id: string;
+};
 
 const rating = [
   { value: 5, label: 'perfect' },
@@ -12,8 +16,7 @@ const rating = [
   { value: 1, label: 'terribly' },
 ];
 
-function ReviewsForm(): JSX.Element {
-  const id = useAppSelector((state) => state.singleOffer.offer.id);
+function ReviewsForm({ id }: TReviewsForm): JSX.Element {
   const dispatch = useAppDispatch();
   const [review, setReview] = useState({ comment: '', rating: 0 });
 
@@ -34,8 +37,14 @@ function ReviewsForm(): JSX.Element {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (id) {
-      console.log(id, review);
-      dispatch(submitReview({ id, review: review }));
+      dispatch(
+        submitReview({
+          id: id,
+          comment: review.comment,
+          rating: review.rating,
+        })
+      );
+      dispatch(getReviews(id));
     }
   }
 
@@ -79,7 +88,8 @@ function ReviewsForm(): JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleInputChange}
         defaultValue={''}
-      ></textarea>
+      >
+      </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set{' '}

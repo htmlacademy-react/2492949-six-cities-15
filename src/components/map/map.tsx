@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 import leaflet, { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { TOffer } from '../../types/offers';
+// import { TOffer } from '../../types/offers';
 import { URL_MARKER_DEFAULT, URL_MARKER_ACTIVE } from '../../consts';
 import useMap from '../../hooks/use-map';
-import { TCityName } from '../../types/offers';
+import { TCityName, TOffer } from '../../types/offers';
 import { CITIES_LOCATIONS } from '../../consts';
 
 type TMapProps = {
@@ -34,7 +34,6 @@ export function Map({
 }: TMapProps): JSX.Element {
   const mapRef = useRef(null);
   const city = CITIES_LOCATIONS.find((item) => item.name === activeCity);
-
   const map = useMap(mapRef);
 
   useEffect(() => {

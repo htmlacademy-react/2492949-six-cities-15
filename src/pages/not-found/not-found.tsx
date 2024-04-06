@@ -1,5 +1,4 @@
 import notFoundStyle from './not-found-style.module.css';
-import Logo from '../../components/logo/logo';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../consts';

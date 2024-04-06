@@ -8,6 +8,7 @@ type TOffersState = {
   city: TCityName;
   offers: TOffer[] | [];
   fetchStatus: boolean;
+  loadingStatus: boolean;
   error: string | null;
 };
 
@@ -15,6 +16,7 @@ const initialState: TOffersState = {
   city: CITIES[0],
   offers: [],
   fetchStatus: false,
+  loadingStatus: false,
   error: null,
 };
 
@@ -35,14 +37,16 @@ export const offersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllOffers.pending, (state) => {
-        state.fetchStatus = true;
+        state.loadingStatus = true;
       })
       .addCase(fetchAllOffers.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.fetchStatus = false;
+        state.loadingStatus = false;
       })
       .addCase(fetchAllOffers.rejected, (state) => {
         state.fetchStatus = false;
+        state.loadingStatus = false;
       });
   },
 });

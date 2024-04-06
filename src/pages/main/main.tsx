@@ -16,7 +16,7 @@ function Main(): JSX.Element {
   );
 
   const isOffersDataLoading = useAppSelector(
-    (state) => state.isOffersDataLoading
+    (state) => state.offers.loadingStatus
   );
 
   const dispatch = useAppDispatch();
@@ -26,10 +26,6 @@ function Main(): JSX.Element {
       dispatch(changeCity({ city: newCity }));
     }
   };
-
-  if (isOffersDataLoading) {
-    return <Spinner />;
-  }
 
   return (
     <div>

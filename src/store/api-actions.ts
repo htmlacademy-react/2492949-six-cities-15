@@ -5,7 +5,7 @@ import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { saveToken, dropToken } from '../services/token';
 import { TOffer } from '../types/offers';
-import { TReviews, TReviewComment } from '../types/reviews';
+import { TReviews } from '../types/reviews';
 import { TAppDispatch, State } from '../types';
 
 export const checkAuthAction = createAsyncThunk<
@@ -74,14 +74,15 @@ export const getReviews = createAsyncThunk<
 
 export const submitReview = createAsyncThunk<
   void,
-  { id: string; review: TReviewComment },
+  { id: string; comment: string; rating: number },
   {
     dispatch: TAppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('review/submit-review', async ({ id, review }, { extra: api }) => {
+>('review/submit-review', async ({ id, comment, rating }, { extra: api }) => {
   await api.post<TReviews>(`/comments/${id}`, {
-    review,
+    comment,
+    rating,
   });
 });
