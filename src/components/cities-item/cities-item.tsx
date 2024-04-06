@@ -1,18 +1,19 @@
 import { TCityName } from '../../types/offers';
+import { offersSlice } from '../../store/slices/offers';
+import { useAppDispatch } from '../../hooks';
 
 type TCityItemProps = {
-  isActive: boolean;
   name: TCityName;
-  onClick: (selectCity: boolean, newCity: TCityName) => void;
 };
 
-function CitiesItem({ name, isActive, onClick }: TCityItemProps): JSX.Element {
+function CitiesItem({ name }: TCityItemProps): JSX.Element {
+  const dispatch = useAppDispatch();
   return (
     <li className="locations__item">
       <a
         className="locations__item-link tabs__item"
         href="#"
-        onClick={() => onClick(isActive, name)}
+        onClick={() => dispatch(offersSlice.actions.changeCity(name))}
       >
         <span>{name}</span>
       </a>

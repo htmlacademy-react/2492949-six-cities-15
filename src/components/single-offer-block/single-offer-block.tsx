@@ -13,7 +13,6 @@ function SingleOfferBlock({
 }: TSingleOffer): JSX.Element {
   const images = currentOffer.images;
   const ratingPercent: string = `${Math.round(+currentOffer.rating) * 20}%`;
-  const activeCity = currentOffer.city;
 
   return (
     <section className="offer">
@@ -111,7 +110,7 @@ function SingleOfferBlock({
         activeOfferId={currentOffer.id}
         page="offer"
         offers={offersNearby}
-        activeCity={activeCity}
+        // activeCity={activeCity}
       />
     </section>
   );

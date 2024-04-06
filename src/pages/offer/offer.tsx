@@ -38,10 +38,12 @@ function Offer(): JSX.Element {
       <Header />
       {fetchStatus ? (
         <main className="page__main page__main--offer">
-          <SingleOfferBlock
-            currentOffer={currentOffer}
-            offersNearby={offersNearby}
-          />
+          {currentOffer && (
+            <SingleOfferBlock
+              currentOffer={currentOffer}
+              offersNearby={offersNearby}
+            />
+          )}
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">
