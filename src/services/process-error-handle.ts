@@ -1,6 +1,11 @@
 import { store } from '../store';
-import { setError } from '../store/action';
-import { clearErrorAction } from '../store/api-actions';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { setError } from '../store/slices/offers';
+import { TIMEOUT_SHOW_ERROR } from '../consts';
+
+export const clearErrorAction = createAsyncThunk('clearError', () => {
+  setTimeout(() => store.dispatch(setError(null)), TIMEOUT_SHOW_ERROR);
+});
 
 export const processErrorHandle = (message: string): void => {
   store.dispatch(setError(message));

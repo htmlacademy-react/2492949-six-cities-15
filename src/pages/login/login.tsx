@@ -13,7 +13,7 @@ function Login(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
+  const authStatus = useAppSelector((state) => state.user.authStatus);
 
   if (authStatus === AuthorizationStatus.Auth) {
     return <Navigate to={AppRoute.Main} />;
@@ -25,7 +25,7 @@ function Login(): JSX.Element {
     if (emailRef.current !== null && passwordRef.current !== null) {
       dispatch(
         loginAction({
-          login: emailRef.current.value,
+          email: emailRef.current.value,
           password: passwordRef.current.value,
         })
       );

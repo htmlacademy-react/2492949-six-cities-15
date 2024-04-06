@@ -41,7 +41,7 @@ const OfferCard = ({
             : 'cities__image-wrapper place-card__image-wrapper'
         }
       >
-        <Link to={`${AppRoute.Offer}${offersData.id}`}>
+        <Link to={`${AppRoute.Offer}/${offersData.id}`}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -84,7 +84,7 @@ const OfferCard = ({
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.Offer}>{title}</Link>
+          <Link to={`${AppRoute.Offer}/${offersData.id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

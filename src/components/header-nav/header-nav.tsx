@@ -5,7 +5,7 @@ import { logoutAction } from '../../store/api-actions';
 import { AuthorizationStatus } from '../../consts';
 
 export function HeaderNav(): JSX.Element {
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
+  const authStatus = useAppSelector((state) => state.user.authStatus);
   const dispatch = useAppDispatch();
 
   return (
