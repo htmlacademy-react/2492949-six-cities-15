@@ -7,9 +7,7 @@ import rootReducer from './reducer';
 export const api = createAPI();
 
 export const store = configureStore({
-  reducer: {
-    rootReducer,
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: {

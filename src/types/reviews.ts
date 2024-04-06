@@ -1,8 +1,16 @@
 export type TReviews = {
   id: string;
   date: string;
-  name: string;
-  avatarURL: string;
-  review: string;
+  user: {
+    name: string;
+    avatarUrl: string;
+    isPro: boolean;
+  };
+  comment: string;
   rating: number;
+};
+
+export type TReviewComment = {
+  rating: number;
+  comment: string;
 };

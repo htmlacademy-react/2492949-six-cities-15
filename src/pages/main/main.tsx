@@ -8,13 +8,12 @@ import { TCityName, TOffer } from '../../types/offers';
 import { changeCity } from '../../store/action';
 import Spinner from '../../components/spinner/spinner';
 
-type TMainProps = {
-  offers: TOffer[];
-};
-
-function Main({ offers }: TMainProps): JSX.Element {
+function Main(): JSX.Element {
   const cityName = useAppSelector((state) => state.offers.city);
-  const cityOffers = offers.filter((offer) => offer.city.name === cityName);
+  const offers = useAppSelector((state) => state.offers.offers);
+  const cityOffers = offers.filter(
+    (offer: TOffer) => offer.city.name === cityName
+  );
 
   const isOffersDataLoading = useAppSelector(
     (state) => state.isOffersDataLoading

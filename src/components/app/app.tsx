@@ -25,7 +25,7 @@ function App(): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Main} element={<Main offers={offers} />} />
+          <Route path={AppRoute.Main} element={<Main />} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route
             path={AppRoute.Favorites}
@@ -35,10 +35,7 @@ function App(): JSX.Element {
               </PrivateRoute>
             }
           />
-          <Route
-            path={`${AppRoute.Offer}/:offerId`}
-            element={<Offer offersData={offers} />}
-          />
+          <Route path={`${AppRoute.Offer}/:offerId`} element={<Offer />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

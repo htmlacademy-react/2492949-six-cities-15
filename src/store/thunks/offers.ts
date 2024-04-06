@@ -11,6 +11,6 @@ export const fetchAllOffers = createAsyncThunk<
 >('offers/fetch-offers', async (_arg, { dispatch, extra: api }) => {
   dispatch(setOffersDataLoadingStatus(true));
   const { data } = await api.get<TOffer[]>('/offers');
-  dispatch(offersSlice.actions.setOffersList);
+  dispatch(offersSlice.actions.setOffersList(data));
   return data;
 });

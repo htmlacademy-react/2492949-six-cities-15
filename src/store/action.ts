@@ -10,10 +10,6 @@ export const setOffersList = createAction(
   })
 );
 
-// export const setError = createAction<string | null>('offers/setError');
-
 export const setOffersDataLoadingStatus = createAction<boolean>(
   'data/setOffersDataLoadingStatus'
 );
-
-export const getOffer = createAction<TOffer>('offer/getOffer');
