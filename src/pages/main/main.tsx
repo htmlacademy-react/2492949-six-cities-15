@@ -2,10 +2,9 @@ import { Helmet } from 'react-helmet-async';
 import { CITIES } from '../../consts';
 import { OffersList } from '../../components/offers-list/offers-list';
 import Header from '../../components/header/header';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 import CitiesItem from '../../components/cities-item/cities-item';
-import { TCityName, TOffer } from '../../types/offers';
-import { changeCity } from '../../store/action';
+import { TOffer } from '../../types/offers';
 import Spinner from '../../components/spinner/spinner';
 
 function Main(): JSX.Element {
@@ -18,14 +17,6 @@ function Main(): JSX.Element {
   const isOffersDataLoading = useAppSelector(
     (state) => state.offers.loadingStatus
   );
-
-  const dispatch = useAppDispatch();
-
-  const handleCityClick = (isSelected: boolean, newCity: TCityName) => {
-    if (!isSelected) {
-      dispatch(changeCity({ city: newCity }));
-    }
-  };
 
   return (
     <div>
