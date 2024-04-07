@@ -1,3 +1,4 @@
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 import { TOffer } from '../../types/offers';
@@ -68,4 +69,5 @@ function Offer(): JSX.Element {
   );
 }
 
-export default Offer;
+const MemoizedOffer = React.memo(Offer);
+export default MemoizedOffer;

@@ -6,6 +6,8 @@ import { AuthorizationStatus } from '../../consts';
 
 export function HeaderNav(): JSX.Element {
   const authStatus = useAppSelector((state) => state.user.authStatus);
+  const user = useAppSelector((state) => state.user);
+
   const dispatch = useAppDispatch();
 
   return (
@@ -25,13 +27,16 @@ export function HeaderNav(): JSX.Element {
       ) : (
         <ul className="header__nav-list">
           <li className="header__nav-item user">
-            <a className="header__nav-link header__nav-link--profile" href="#">
+            <Link
+              to={AppRoute.Favorites}
+              className="header__nav-link header__nav-link--profile"
+            >
               <div className="header__avatar-wrapper user__avatar-wrapper"></div>
               <span className="header__user-name user__name">
-                Oliver.conner@gmail.com
+                {user.user?.email}
               </span>
               <span className="header__favorite-count">3</span>
-            </a>
+            </Link>
           </li>
           <li className="header__nav-item">
             <Link
