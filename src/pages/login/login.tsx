@@ -1,3 +1,4 @@
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useRef, FormEvent } from 'react';
 import { Navigate } from 'react-router-dom';
@@ -7,6 +8,7 @@ import { loginAction } from '../../store/api-actions';
 import Header from '../../components/header/header';
 import { useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../consts';
+import { Link } from 'react-router-dom';
 
 function Login(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -82,9 +84,9 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <Link className="locations__item-link" to={AppRoute.Main}>
                 <span>Amsterdam</span>
-              </a>
+              </Link>
             </div>
           </section>
         </div>
@@ -93,4 +95,5 @@ function Login(): JSX.Element {
   );
 }
 
-export default Login;
+const MemoizedLogin = React.memo(Login);
+export default MemoizedLogin;

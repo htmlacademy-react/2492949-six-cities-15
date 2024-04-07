@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Spinner(): JSX.Element {
   return (
     <div className="cities">
@@ -11,4 +13,5 @@ function Spinner(): JSX.Element {
   );
 }
 
-export default Spinner;
+const MemoizedSpinner = React.memo(Spinner);
+export default MemoizedSpinner;

@@ -1,7 +1,8 @@
+import React from 'react';
 import { useAppSelector } from '../../hooks';
 import errorMessageStyle from './error-message.module.css';
 
-function ErrorMessage(): JSX.Element | null {
+export function ErrorMessage(): JSX.Element | null {
   const error = useAppSelector((state) => state.offers.error);
 
   return error ? (
@@ -9,4 +10,5 @@ function ErrorMessage(): JSX.Element | null {
   ) : null;
 }
 
-export default ErrorMessage;
+const MemoizedErrorMessage = React.memo(ErrorMessage);
+export default MemoizedErrorMessage;

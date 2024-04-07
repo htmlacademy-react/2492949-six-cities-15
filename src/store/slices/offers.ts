@@ -41,7 +41,7 @@ export const offersSlice = createSlice({
       })
       .addCase(fetchAllOffers.fulfilled, (state, action) => {
         state.offers = action.payload;
-        state.fetchStatus = false;
+        state.fetchStatus = true;
         state.loadingStatus = false;
       })
       .addCase(fetchAllOffers.rejected, (state) => {

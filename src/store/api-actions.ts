@@ -46,7 +46,6 @@ export const getOffer = createAsyncThunk<
   }
 >('offers/get-offer', async (offerID, { extra: api }) => {
   const { data } = await api.get<TOffer>(`/offers/${offerID}`);
-  // `${AppRoute.Offer}/${offerID}`
   return data;
 });
 

@@ -10,7 +10,8 @@ type TReviews = {
 };
 
 function Reviews({ id }: TReviews): JSX.Element {
-  const reviews = useAppSelector((state) => state.singleOffer.reviews);
+  let reviews = useAppSelector((state) => state.singleOffer.reviews);
+  const reviewsCount = reviews.length;
   const isAuth = useAppSelector((state) => state.user.authStatus);
 
   const dispatch = useAppDispatch();
@@ -21,9 +22,15 @@ function Reviews({ id }: TReviews): JSX.Element {
     }
   }, [id, dispatch]);
 
+  if (reviews.length !== 0) {
+    reviews = reviews.slice().reverse().slice(0, 10);
+  }
+
   return (
     <section className="offer__reviews reviews">
-      <ReviewsList reviews={reviews} />
+      {reviews.length !== 0 && (
+        <ReviewsList reviews={reviews} reviewsCount={reviewsCount} />
+      )}
       {isAuth === AuthorizationStatus.Auth && <ReviewsForm id={id} />}
       {!isAuth && (
         <p>Только авторизованные пользовател могут оставлять комментарии</p>
