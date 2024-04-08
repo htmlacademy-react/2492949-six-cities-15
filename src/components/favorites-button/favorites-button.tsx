@@ -21,7 +21,7 @@ function FavoritesButton({
   height,
 }: TFavoritesButton): JSX.Element {
   const authStatus = useAppSelector((state) => state.user.authStatus);
-  const [isAddedToFavorites, setIsAddedToFavorites] = useState(isFavorite);
+  // const [isAddedToFavorites, setIsAddedToFavorites] = useState(isFavorite);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -30,8 +30,8 @@ function FavoritesButton({
       authStatus !== AuthorizationStatus.NoAuth &&
       authStatus !== AuthorizationStatus.Unknown
     ) {
-      dispatch(setFavorites({ id: id, status: isAddedToFavorites }));
-      setIsAddedToFavorites(!isAddedToFavorites);
+      dispatch(setFavorites({ id: id, status: isFavorite }));
+      // setIsAddedToFavorites(!isAddedToFavorites);
     } else {
       navigate(AppRoute.Login);
     }
@@ -40,7 +40,7 @@ function FavoritesButton({
   return (
     <button
       className={
-        isAddedToFavorites
+        isFavorite
           ? 'place-card__bookmark-button place-card__bookmark-button--active button'
           : 'place-card__bookmark-button button'
       }
