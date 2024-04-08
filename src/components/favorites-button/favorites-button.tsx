@@ -3,7 +3,6 @@ import { AuthorizationStatus } from '../../consts';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../consts';
 import { setFavorites } from '../../store/api-actions';
-import { useState } from 'react';
 
 type TFavoritesButton = {
   isFavorite: boolean;

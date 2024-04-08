@@ -125,3 +125,11 @@ export const URL_MARKER_DEFAULT = '/img/pin.svg';
 export const URL_MARKER_ACTIVE = '/img/pin-active.svg';
 
 export const TIMEOUT_SHOW_ERROR = 2000;
+
+export const RATINGSTARS = [
+  { value: 5, label: 'perfect' },
+  { value: 4, label: 'good' },
+  { value: 3, label: 'not bad' },
+  { value: 2, label: 'badly' },
+  { value: 1, label: 'terribly' },
+];
