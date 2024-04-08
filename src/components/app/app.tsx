@@ -10,6 +10,7 @@ import Offer from '../../pages/offer/offer';
 import PrivateRoute from '../private-route/private-route.tsx';
 import { HelmetProvider } from 'react-helmet-async';
 import { fetchAllOffers } from '../../store/thunks/offers.ts';
+import { fetchFavorites } from '../../store/api-actions.ts';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -17,9 +18,8 @@ function App(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchAllOffers());
+    dispatch(fetchFavorites());
   }, [dispatch]);
-
-  const offers = useAppSelector((state) => state.offers.offers);
 
   return (
     <HelmetProvider>
@@ -31,7 +31,7 @@ function App(): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={authStatus}>
-                <Favorites offersData={offers} />
+                <Favorites />
               </PrivateRoute>
             }
           />
