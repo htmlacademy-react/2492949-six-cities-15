@@ -44,6 +44,7 @@ function ReviewsForm({ id }: TReviewsForm): JSX.Element {
           rating: review.rating,
         })
       );
+      setReview({ comment: '', rating: 0 });
       dispatch(getReviews(id));
     }
   }
@@ -85,9 +86,9 @@ function ReviewsForm({ id }: TReviewsForm): JSX.Element {
         className="reviews__textarea form__textarea"
         id="comment"
         name="comment"
+        value={review.comment}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleInputChange}
-        defaultValue={''}
       >
       </textarea>
       <div className="reviews__button-wrapper">

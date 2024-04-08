@@ -1,7 +1,7 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
-import { AppRoute } from '../../consts.ts';
+import { AppRoute, AuthorizationStatus } from '../../consts.ts';
 import Main from '../../pages/main/main';
 import Favorites from '../../pages/favourites/favourites';
 import Login from '../../pages/login/login';
@@ -17,9 +17,13 @@ function App(): JSX.Element {
   const authStatus = useAppSelector((state) => state.user.authStatus);
 
   useEffect(() => {
-    dispatch(fetchAllOffers());
-    dispatch(fetchFavorites());
-  }, [dispatch]);
+    if (authStatus !== AuthorizationStatus.Auth) {
+      dispatch(fetchAllOffers());
+    } else {
+      dispatch(fetchAllOffers());
+      dispatch(fetchFavorites());
+    }
+  }, [dispatch, authStatus]);
 
   return (
     <HelmetProvider>

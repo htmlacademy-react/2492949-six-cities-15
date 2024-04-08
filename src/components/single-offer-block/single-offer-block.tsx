@@ -1,6 +1,7 @@
 import { Map } from '../map/map';
 import Reviews from '../reviews/reviews';
 import { TOffer } from '../../types/offers';
+import FavoritesButton from '../favorites-button/favorites-button';
 
 type TSingleOffer = {
   currentOffer: TOffer;
@@ -11,8 +12,14 @@ function SingleOfferBlock({
   currentOffer,
   offersNearby,
 }: TSingleOffer): JSX.Element {
-  const images = currentOffer.images;
+  let images = currentOffer.images;
+  if (images !== undefined && images.length > 6) {
+    images = images?.slice(0, 6);
+  }
+
   const ratingPercent: string = `${Math.round(+currentOffer.rating) * 20}%`;
+  const isFavorite = currentOffer.isFavorite;
+  const id = currentOffer.id;
 
   return (
     <section className="offer">
@@ -20,7 +27,7 @@ function SingleOfferBlock({
         <div className="offer__gallery">
           {images &&
             images.map((imageURL) => (
-              <div className="offer__image-wrapper" key={`${imageURL}name`}>
+              <div className="offer__image-wrapper" key={`${imageURL}+${id}`}>
                 <img
                   className="offer__image"
                   src={imageURL}
@@ -39,12 +46,13 @@ function SingleOfferBlock({
           )}
           <div className="offer__name-wrapper">
             <h1 className="offer__name">{currentOffer.title}</h1>
-            <button className="offer__bookmark-button button" type="button">
-              <svg className="offer__bookmark-icon" width="31" height="33">
-                <use xlinkHref="#icon-bookmark"></use>
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
+            <FavoritesButton
+              id={id}
+              isFavorite={isFavorite}
+              page="offer"
+              width={'31'}
+              height={'33'}
+            />
           </div>
           <div className="offer__rating rating">
             <div className="offer__stars rating__stars">
@@ -60,10 +68,12 @@ function SingleOfferBlock({
               {currentOffer.type}
             </li>
             <li className="offer__feature offer__feature--bedrooms">
-              {currentOffer.bedrooms} Bedrooms
+              {currentOffer.bedrooms}{' '}
+              {currentOffer.bedrooms === 1 ? 'Bedroom' : 'Bedrooms'}
             </li>
             <li className="offer__feature offer__feature--adults">
-              Max {currentOffer.maxAdults} adults
+              Max {currentOffer.maxAdults}{' '}
+              {currentOffer.maxAdults === 1 ? 'adult' : 'adults'}
             </li>
           </ul>
           <div className="offer__price">
@@ -106,12 +116,7 @@ function SingleOfferBlock({
           <Reviews id={currentOffer.id} />
         </div>
       </div>
-      <Map
-        activeOfferId={currentOffer.id}
-        page="offer"
-        offers={offersNearby}
-        // activeCity={activeCity}
-      />
+      <Map activeOfferId={currentOffer.id} page="offer" offers={offersNearby} />
     </section>
   );
 }

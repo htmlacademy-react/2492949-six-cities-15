@@ -8,9 +8,18 @@ import { useState } from 'react';
 type TFavoritesButton = {
   isFavorite: boolean;
   id: string;
+  // page?: string;
+  width: string;
+  height: string;
 };
 
-function FavoritesButton({ isFavorite, id }: TFavoritesButton): JSX.Element {
+function FavoritesButton({
+  isFavorite,
+  id,
+  // page,
+  width,
+  height,
+}: TFavoritesButton): JSX.Element {
   const authStatus = useAppSelector((state) => state.user.authStatus);
   const [isAddedToFavorites, setIsAddedToFavorites] = useState(isFavorite);
   const navigate = useNavigate();
@@ -38,7 +47,7 @@ function FavoritesButton({ isFavorite, id }: TFavoritesButton): JSX.Element {
       type="button"
       onClick={changeFavoritesButton}
     >
-      <svg className="place-card__bookmark-icon" width="18" height="19">
+      <svg className="place-card__bookmark-icon" width={width} height={height}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">To bookmarks</span>
