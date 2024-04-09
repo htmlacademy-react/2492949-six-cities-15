@@ -1,26 +1,27 @@
 import React from 'react';
-import { TOffer } from '../../types/offers';
 import { FavoritesBlock } from '../../components/favorites-block/favorites-block';
 import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/footer/footer';
+import { useAppSelector } from '../../hooks';
+import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 
-type TFavoritesProps = {
-  offersData: TOffer[];
-};
+function Favorites(): JSX.Element {
+  const favoriteOffers = useAppSelector(
+    (state) => state.favorites.favoriteOffers
+  );
 
-function Favorites({ offersData }: TFavoritesProps): JSX.Element {
   return (
     <div className="page">
       <Helmet>
         <title>Шесть городов. Избранное</title>
       </Helmet>
       <Header />
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <FavoritesBlock offerList={offersData} />
-        </div>
-      </main>
+      {favoriteOffers.length !== 0 ? (
+        <FavoritesBlock offerList={favoriteOffers} />
+      ) : (
+        <FavoritesEmpty />
+      )}
       <Footer />
     </div>
   );

@@ -4,7 +4,11 @@ import { useAppSelector, useAppDispatch } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { AuthorizationStatus } from '../../consts';
 
-export function HeaderNav(): JSX.Element {
+type THeaderNav = {
+  favoritesCount: number;
+};
+
+export function HeaderNav({ favoritesCount }: THeaderNav): JSX.Element {
   const authStatus = useAppSelector((state) => state.user.authStatus);
   const user = useAppSelector((state) => state.user);
 
@@ -35,7 +39,7 @@ export function HeaderNav(): JSX.Element {
               <span className="header__user-name user__name">
                 {user.user?.email}
               </span>
-              <span className="header__favorite-count">3</span>
+              <span className="header__favorite-count">{favoritesCount}</span>
             </Link>
           </li>
           <li className="header__nav-item">

@@ -1,5 +1,5 @@
 import { TOffer } from '../../types/offers';
-import Card from '../offer-card/offer-card';
+import OfferCard from '../offer-card/offer-card';
 
 type TOffersListProps = {
   offers: TOffer[];
@@ -17,7 +17,7 @@ export function OffersBlock({
   let offersList: React.ReactNode[] = [];
   if (handleMouseEnter && handleMouseLeave) {
     offersList = offers.map((offer) => (
-      <Card
+      <OfferCard
         offersData={offer}
         key={offer.id}
         onMouseEnter={() => handleMouseEnter(offer.id)}
@@ -27,7 +27,7 @@ export function OffersBlock({
     ));
   } else {
     offersList = offers.map((offer) => (
-      <Card offersData={offer} key={offer.id} page={page} />
+      <OfferCard offersData={offer} key={offer.id} page={page} />
     ));
   }
 

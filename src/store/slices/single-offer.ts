@@ -10,7 +10,7 @@ type TSingleOfferState = {
   fetchStatus: boolean;
   reviews: TReviews[] | [];
   isFailed: boolean;
-  isReviewSubmitted: boolean;
+  isReviewPending: boolean;
 };
 
 const initialState: TSingleOfferState = {
@@ -19,7 +19,7 @@ const initialState: TSingleOfferState = {
   fetchStatus: false,
   reviews: [],
   isFailed: false,
-  isReviewSubmitted: false,
+  isReviewPending: false,
 };
 
 export const singleOfferSlice = createSlice({
@@ -43,10 +43,13 @@ export const singleOfferSlice = createSlice({
         state.reviews = action.payload;
       })
       .addCase(submitReview.fulfilled, (state) => {
-        state.isReviewSubmitted = true;
+        state.isReviewPending = false;
       })
       .addCase(submitReview.rejected, (state) => {
-        state.isReviewSubmitted = false;
+        state.isReviewPending = false;
+      })
+      .addCase(submitReview.pending, (state) => {
+        state.isReviewPending = true;
       });
   },
 });

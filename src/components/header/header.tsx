@@ -1,9 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../consts';
 import { HeaderNav } from '../header-nav/header-nav';
+import { useAppSelector } from '../../hooks';
 
 function Header(): JSX.Element {
   const currentPath = useLocation().pathname;
+  const favorites = useAppSelector((state) => state.favorites.favoriteOffers);
+  const favoritesCount = favorites.length;
 
   return (
     <header className="header">
@@ -27,7 +30,9 @@ function Header(): JSX.Element {
               />
             </Link>
           </div>
-          {currentPath !== AppRoute.Login && <HeaderNav />}
+          {currentPath !== AppRoute.Login && (
+            <HeaderNav favoritesCount={favoritesCount} />
+          )}
         </div>
       </div>
     </header>

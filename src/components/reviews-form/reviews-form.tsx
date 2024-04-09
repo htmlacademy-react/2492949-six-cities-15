@@ -1,24 +1,23 @@
-import { Fragment, useState } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getReviews, submitReview } from '../../store/api-actions';
 import { FormEvent } from 'react';
 import { ChangeEvent } from 'react';
+import ReviewsFormRating from '../review-form-rating/review-form-rating';
+import { RATINGSTARS } from '../../consts';
+import { useRef } from 'react';
 
 type TReviewsForm = {
   id: string;
 };
 
-const rating = [
-  { value: 5, label: 'perfect' },
-  { value: 4, label: 'good' },
-  { value: 3, label: 'not bad' },
-  { value: 2, label: 'badly' },
-  { value: 1, label: 'terribly' },
-];
-
 function ReviewsForm({ id }: TReviewsForm): JSX.Element {
   const dispatch = useAppDispatch();
   const [review, setReview] = useState({ comment: '', rating: 0 });
+  const isReviewSubmitted = useAppSelector(
+    (state) => state.singleOffer.isReviewPending
+  );
+  const reviewForm = useRef<HTMLFormElement>(null);
 
   function handleInputChange(e: ChangeEvent<HTMLTextAreaElement>) {
     setReview({
@@ -44,8 +43,13 @@ function ReviewsForm({ id }: TReviewsForm): JSX.Element {
           rating: review.rating,
         })
       );
+      setReview({ comment: '', rating: 0 });
       dispatch(getReviews(id));
     }
+  }
+
+  if (reviewForm.current !== null && isReviewSubmitted) {
+    reviewForm.current.reset();
   }
 
   return (
@@ -54,40 +58,29 @@ function ReviewsForm({ id }: TReviewsForm): JSX.Element {
       action="#"
       method="post"
       onSubmit={handleSubmit}
+      ref={reviewForm}
     >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {rating.map(({ value, label }) => (
-          <Fragment key={value}>
-            <input
-              className="form__rating-input visually-hidden"
-              name="rating"
-              defaultValue={value}
-              id={`${value}-stars"`}
-              type="radio"
-              onChange={handleRatingChange}
-            />
-            <label
-              htmlFor={`${value}-stars"`}
-              className="reviews__rating-label form__rating-label"
-              title={label}
-            >
-              <svg className="form__star-image" width="37" height="33">
-                <use xlinkHref="#icon-star"></use>
-              </svg>
-            </label>
-          </Fragment>
+        {RATINGSTARS.map(({ value, label }) => (
+          <ReviewsFormRating
+            key={value}
+            value={value}
+            label={label}
+            handleRating={handleRatingChange}
+            isRatingSubmitted={isReviewSubmitted}
+          />
         ))}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
         id="comment"
         name="comment"
+        value={review.comment}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleInputChange}
-        defaultValue={''}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -100,6 +93,7 @@ function ReviewsForm({ id }: TReviewsForm): JSX.Element {
           className="reviews__submit form__submit button"
           type="submit"
           disabled={
+            isReviewSubmitted ||
             review.comment.length < 50 ||
             review.comment.length > 300 ||
             review.rating === 0

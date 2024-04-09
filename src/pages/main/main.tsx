@@ -38,9 +38,8 @@ function Main(): JSX.Element {
             </ul>
           </section>
         </div>
-        {isOffersDataLoading ? (
-          <Spinner />
-        ) : (
+        {isOffersDataLoading && offers.length === 0 && <Spinner />}
+        {fetchStatus && offers.length !== 0 && (
           <OffersList offersData={cityOffers} activeCity={cityName} />
         )}
         {offers.length === 0 && fetchStatus === true ? <MainEmpty /> : null}

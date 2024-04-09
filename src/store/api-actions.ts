@@ -7,6 +7,7 @@ import { saveToken, dropToken } from '../services/token';
 import { TOffer } from '../types/offers';
 import { TReviews } from '../types/reviews';
 import { TAppDispatch, State } from '../types';
+import { fetchAllOffers } from './thunks/offers';
 
 export const checkAuthAction = createAsyncThunk<
   UserData,
@@ -85,3 +86,28 @@ export const submitReview = createAsyncThunk<
     rating,
   });
 });
+
+export const fetchFavorites = createAsyncThunk<
+  TOffer[],
+  undefined,
+  { dispatch: TAppDispatch; state: State; extra: AxiosInstance }
+>('favorites/fetch-favorites', async (_arg, { extra: api }) => {
+  const { data } = await api.get<TOffer[]>('/favorite');
+  return data;
+});
+
+export const setFavorites = createAsyncThunk<
+  TOffer,
+  { id: string; status: boolean },
+  { dispatch: TAppDispatch; state: State; extra: AxiosInstance }
+>(
+  'favorites/set-favorites',
+  async ({ id, status }, { dispatch, extra: api }) => {
+    const { data } = await api.post<TOffer>(
+      `/favorite/${id}/${status ? 0 : 1}`
+    );
+    dispatch(fetchFavorites());
+    dispatch(fetchAllOffers());
+    return data;
+  }
+);

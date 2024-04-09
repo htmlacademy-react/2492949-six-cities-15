@@ -1,6 +1,7 @@
 import { AppRoute } from '../../consts';
 import { TOffer } from '../../types/offers';
 import { Link } from 'react-router-dom';
+import FavoritesButton from '../favorites-button/favorites-button';
 
 type CardProps = {
   offersData: TOffer;
@@ -15,8 +16,16 @@ const OfferCard = ({
   onMouseLeave,
   page,
 }: CardProps) => {
-  const { title, isFavorite, isPremium, previewImage, price, rating, type } =
-    offersData;
+  const {
+    id,
+    title,
+    isFavorite,
+    isPremium,
+    previewImage,
+    price,
+    rating,
+    type,
+  } = offersData;
   const ratingPercent: string = `${Math.round(+rating) * 20}%`;
 
   return (
@@ -63,19 +72,13 @@ const OfferCard = ({
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            className={
-              isFavorite
-                ? 'place-card__bookmark-button place-card__bookmark-button--active button'
-                : 'place-card__bookmark-button button'
-            }
-            type="button"
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoritesButton
+            isFavorite={isFavorite}
+            id={id}
+            width={'18'}
+            height={'19'}
+            page="main"
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
