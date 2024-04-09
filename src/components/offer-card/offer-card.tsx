@@ -77,6 +77,7 @@ const OfferCard = ({
             id={id}
             width={'18'}
             height={'19'}
+            page="main"
           />
         </div>
         <div className="place-card__rating rating">

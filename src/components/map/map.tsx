@@ -5,6 +5,7 @@ import { URL_MARKER_DEFAULT, URL_MARKER_ACTIVE } from '../../consts';
 import useMap from '../../hooks/use-map';
 import { TCityName, TOffer } from '../../types/offers';
 import { CITIES_LOCATIONS } from '../../consts';
+import { useAppSelector } from '../../hooks';
 
 type TMapProps = {
   offers: TOffer[];
@@ -32,18 +33,30 @@ export function Map({
   activeCity,
 }: TMapProps): JSX.Element {
   const mapRef = useRef(null);
-  const city = CITIES_LOCATIONS.find((item) => item.name === activeCity);
+  const offerPlace = useAppSelector(
+    (state) => state.singleOffer.offer?.city
+  )?.location;
+  const city = CITIES_LOCATIONS.find(
+    (item) => item.name === activeCity
+  )?.location;
+
   const map = useMap(mapRef);
 
   useEffect(() => {
     if (city && map) {
       const loc: leaflet.LatLngExpression = {
-        lat: city.location.latitude,
-        lng: city.location.longitude,
+        lat: city.latitude,
+        lng: city.longitude,
       };
-      map.setView(loc, city.location.zoom);
+      map.setView(loc, city.zoom);
+    } else if (offerPlace && map) {
+      const loc: leaflet.LatLngExpression = {
+        lat: offerPlace.latitude,
+        lng: offerPlace.longitude,
+      };
+      map.setView(loc, offerPlace.zoom);
     }
-  }, [map, city]);
+  }, [map, city, offerPlace]);
 
   useEffect(() => {
     if (offers) {

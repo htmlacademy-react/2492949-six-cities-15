@@ -42,7 +42,7 @@ function Offer(): JSX.Element {
           {currentOffer && (
             <SingleOfferBlock
               currentOffer={currentOffer}
-              offersNearby={offersNearby}
+              offersNearby={threeOffersNearby}
             />
           )}
           <div className="container">

@@ -7,7 +7,7 @@ import { setFavorites } from '../../store/api-actions';
 type TFavoritesButton = {
   isFavorite: boolean;
   id: string;
-  // page?: string;
+  page?: string;
   width: string;
   height: string;
 };
@@ -15,12 +15,11 @@ type TFavoritesButton = {
 function FavoritesButton({
   isFavorite,
   id,
-  // page,
+  page,
   width,
   height,
 }: TFavoritesButton): JSX.Element {
   const authStatus = useAppSelector((state) => state.user.authStatus);
-  // const [isAddedToFavorites, setIsAddedToFavorites] = useState(isFavorite);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -30,19 +29,29 @@ function FavoritesButton({
       authStatus !== AuthorizationStatus.Unknown
     ) {
       dispatch(setFavorites({ id: id, status: isFavorite }));
-      // setIsAddedToFavorites(!isAddedToFavorites);
     } else {
       navigate(AppRoute.Login);
     }
   };
 
+  let buttonClass;
+  if (page === 'offer') {
+    if (isFavorite) {
+      buttonClass = 'offer__bookmark-button offer__bookmark-button--active';
+    } else {
+      buttonClass = 'offer__bookmark-button';
+    }
+  } else {
+    if (isFavorite) {
+      buttonClass = 'place-card__bookmark-button--active';
+    } else {
+      buttonClass = 'place-card__bookmark-button';
+    }
+  }
+
   return (
     <button
-      className={
-        isFavorite
-          ? 'place-card__bookmark-button place-card__bookmark-button--active button'
-          : 'place-card__bookmark-button button'
-      }
+      className={`${buttonClass} button`}
       type="button"
       onClick={changeFavoritesButton}
     >
