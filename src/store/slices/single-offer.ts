@@ -11,6 +11,7 @@ type TSingleOfferState = {
   reviews: TReviews[] | [];
   isFailed: boolean;
   isReviewPending: boolean;
+  reviewFailed: boolean;
 };
 
 const initialState: TSingleOfferState = {
@@ -20,6 +21,7 @@ const initialState: TSingleOfferState = {
   reviews: [],
   isFailed: false,
   isReviewPending: false,
+  reviewFailed: false,
 };
 
 export const singleOfferSlice = createSlice({
@@ -47,6 +49,7 @@ export const singleOfferSlice = createSlice({
       })
       .addCase(submitReview.rejected, (state) => {
         state.isReviewPending = false;
+        state.reviewFailed = true;
       })
       .addCase(submitReview.pending, (state) => {
         state.isReviewPending = true;

@@ -33,7 +33,7 @@ const OfferCard = ({
       className={
         page === 'favorites'
           ? 'favorites__card place-card'
-          : 'near-places__card place-card'
+          : 'cities__card place-card'
       }
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

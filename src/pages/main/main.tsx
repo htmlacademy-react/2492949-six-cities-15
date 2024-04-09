@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Helmet } from 'react-helmet-async';
 import { CITIES } from '../../consts';
 import { OffersList } from '../../components/offers-list/offers-list';
@@ -21,13 +22,16 @@ function Main(): JSX.Element {
     (state) => state.offers.loadingStatus
   );
 
+  const mainEmptyClass =
+    offers.length === 0 && fetchStatus === true && 'page__main--index-empty';
+
   return (
-    <div>
+    <div className="page page--gray page--main">
       <Helmet>
         <title>Шесть городов. Главная</title>
       </Helmet>
       <Header />
-      <main className="page__main page__main--index">
+      <main className={` page__main page__main--index ${mainEmptyClass}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
