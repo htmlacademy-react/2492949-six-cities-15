@@ -44,8 +44,8 @@ export function HeaderNav({ favoritesCount }: THeaderNav): JSX.Element {
           </li>
           <li className="header__nav-item">
             <Link
+              to={AppRoute.Login}
               className="header__nav-link"
-              to={AppRoute.Main}
               onClick={(e) => {
                 e.preventDefault();
                 dispatch(logoutAction());

@@ -33,7 +33,8 @@ export function OffersList({
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">
-            {offersData.length} places to stay in {activeCity}
+            {offersData.length} {offersData.length === 0 ? 'place' : 'places'}{' '}
+            to stay in {activeCity}
           </b>
           <OffersSorting
             setSortingType={setSortingType}

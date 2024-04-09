@@ -21,6 +21,8 @@ function SingleOfferBlock({
   const isFavorite = currentOffer.isFavorite;
   const id = currentOffer.id;
 
+  const proClass = currentOffer.host?.isPro && 'offer__avatar-wrapper--pro';
+
   return (
     <section className="offer">
       <div className="offer__gallery-container container">
@@ -93,7 +95,9 @@ function SingleOfferBlock({
           <div className="offer__host">
             <h2 className="offer__host-title">Meet the host</h2>
             <div className="offer__host-user user">
-              <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+              <div
+                className={`offer__avatar-wrapper user__avatar-wrapper ${proClass}`}
+              >
                 <img
                   className="offer__avatar user__avatar"
                   src={currentOffer.host?.avatarUrl}
