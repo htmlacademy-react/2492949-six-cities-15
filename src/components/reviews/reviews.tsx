@@ -31,7 +31,7 @@ function Reviews({ id }: TReviews): JSX.Element {
       {reviews.length !== 0 && <ReviewsList reviews={reviews} />}
       {isAuth === AuthorizationStatus.Auth && <ReviewsForm id={id} />}
       {!isAuth && (
-        <p>Только авторизованные пользовател могут оставлять комментарии</p>
+        <p>Только авторизованные пользовател могут оставлять комментарии.</p>
       )}
     </section>
   );
