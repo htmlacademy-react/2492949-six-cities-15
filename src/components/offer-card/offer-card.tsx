@@ -47,20 +47,6 @@ const OfferCard = ({
     imageWrapperClass = 'cities__image-wrapper place-card__image-wrapper';
   }
 
-  // const cardClass =
-  //   page === 'favorites'
-  //     ? 'favorites__card place-card'
-  //     : page === 'offer'
-  //       ? 'near-places__card place-card'
-  //       : 'cities__card place-card';
-
-  // const imageWrapperClass =
-  //   page === 'favorites'
-  //     ? 'favorites__image-wrapper place-card__image-wrapper'
-  //     : page === 'offer'
-  //       ? 'near-places__image-wrapper place-card__image-wrapper'
-  //       : 'cities__image-wrapper place-card__image-wrapper';
-
   return (
     <article
       className={cardClass}

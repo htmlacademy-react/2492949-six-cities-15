@@ -34,23 +34,6 @@ function FavoritesButton({
     }
   };
 
-  // let buttonClass;
-  // if (page === 'offer') {
-  //   if (isFavorite) {
-  //     buttonClass =
-  //       'offer__bookmark-button--active place-card__bookmark-button--active offer__bookmark-button';
-  //   } else {
-  //     buttonClass = 'offer__bookmark-button';
-  //   }
-  // } else {
-  //   if (isFavorite) {
-  //     buttonClass =
-  //       'place-card__bookmark-button--active place-card__bookmark-button--active';
-  //   } else {
-  //     buttonClass = 'place-card__bookmark-button';
-  //   }
-  // }
-
   let buttonClass;
   if (page === 'offer') {
     if (isFavorite) {

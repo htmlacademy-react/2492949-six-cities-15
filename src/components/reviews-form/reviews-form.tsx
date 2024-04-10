@@ -61,9 +61,7 @@ function ReviewsForm({ id }: TReviewsForm): JSX.Element {
     if (reviewSubmitStatus === fetchStatus.fullfield) {
       dispatch(getReviews(id));
     }
-    console.log(isReviewSubmitted);
-  }, [reviewSubmitStatus, isReviewSubmitted]);
-  console.log(review.rating);
+  }, [dispatch, id, reviewSubmitStatus, isReviewSubmitted]);
 
   return (
     <form
