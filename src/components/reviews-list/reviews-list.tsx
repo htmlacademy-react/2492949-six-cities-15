@@ -1,15 +1,17 @@
 import { ReviewsItem } from '../reviews-item/reviews-item';
 import { TReviews } from '../../types/reviews';
 import { useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
 
 type TReviewsProps = {
   reviews: TReviews[];
 };
 
 function ReviewsList({ reviews }: TReviewsProps): JSX.Element {
-  const reviewsCount = useAppSelector(
+  let reviewsCount = useAppSelector(
     (state) => state.singleOffer.reviews
   ).length;
+
   return (
     <>
       <h2 className="reviews__title">

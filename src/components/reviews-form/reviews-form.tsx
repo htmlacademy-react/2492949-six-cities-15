@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getReviews, submitReview } from '../../store/api-actions';
 import { FormEvent } from 'react';
 import { ChangeEvent } from 'react';
 import ReviewsFormRating from '../review-form-rating/review-form-rating';
-import { RATINGSTARS } from '../../consts';
+import { RATING_STARS, fetchStatus } from '../../consts';
 import { useRef } from 'react';
 
 type TReviewsForm = {
@@ -17,9 +17,13 @@ function ReviewsForm({ id }: TReviewsForm): JSX.Element {
   const isReviewSubmitted = useAppSelector(
     (state) => state.singleOffer.isReviewPending
   );
+  const reviewSubmitStatus = useAppSelector(
+    (state) => state.singleOffer.reviewSubmitStatus
+  );
   const reviewForm = useRef<HTMLFormElement>(null);
 
   function handleInputChange(e: ChangeEvent<HTMLTextAreaElement>) {
+    e.preventDefault();
     setReview({
       ...review,
       comment: e.target.value,
@@ -43,14 +47,23 @@ function ReviewsForm({ id }: TReviewsForm): JSX.Element {
           rating: review.rating,
         })
       );
-      setReview({ comment: '', rating: 0 });
-      dispatch(getReviews(id));
     }
   }
 
-  if (reviewForm.current !== null && isReviewSubmitted) {
-    reviewForm.current.reset();
-  }
+  useEffect(() => {
+    if (
+      reviewSubmitStatus === fetchStatus.fullfield &&
+      reviewForm.current !== null
+    ) {
+      reviewForm.current.reset();
+      setReview({ comment: '', rating: 0 });
+    }
+    if (reviewSubmitStatus === fetchStatus.fullfield) {
+      dispatch(getReviews(id));
+    }
+    console.log(isReviewSubmitted);
+  }, [reviewSubmitStatus, isReviewSubmitted]);
+  console.log(review.rating);
 
   return (
     <form
@@ -64,11 +77,12 @@ function ReviewsForm({ id }: TReviewsForm): JSX.Element {
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {RATINGSTARS.map(({ value, label }) => (
+        {RATING_STARS.map(({ value, label }) => (
           <ReviewsFormRating
             key={value}
             value={value}
             label={label}
+            checked={review.rating === value}
             handleRating={handleRatingChange}
             isRatingSubmitted={isReviewSubmitted}
           />
@@ -79,10 +93,10 @@ function ReviewsForm({ id }: TReviewsForm): JSX.Element {
         id="comment"
         name="comment"
         value={review.comment}
+        disabled={isReviewSubmitted}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleInputChange}
-      >
-      </textarea>
+      ></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set{' '}

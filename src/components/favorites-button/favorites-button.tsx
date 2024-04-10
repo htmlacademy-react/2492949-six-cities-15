@@ -23,7 +23,7 @@ function FavoritesButton({
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const changeFavoritesButton = () => {
+  const handleFavoritesButton = () => {
     if (
       authStatus !== AuthorizationStatus.NoAuth &&
       authStatus !== AuthorizationStatus.Unknown
@@ -37,25 +37,31 @@ function FavoritesButton({
   let buttonClass;
   if (page === 'offer') {
     if (isFavorite) {
-      buttonClass = 'offer__bookmark-button offer__bookmark-button--active';
+      buttonClass =
+        'offer__bookmark-button--active place-card__bookmark-button--active offer__bookmark-button';
     } else {
       buttonClass = 'offer__bookmark-button';
     }
   } else {
     if (isFavorite) {
-      buttonClass = 'place-card__bookmark-button--active';
+      buttonClass =
+        'place-card__bookmark-button--active place-card__bookmark-button--active';
     } else {
       buttonClass = 'place-card__bookmark-button';
     }
   }
 
+  const svgClassName =
+    page === 'offer' ? 'offer__bookmark-icon' : 'place-card__bookmark-icon';
+
   return (
     <button
       className={`${buttonClass} button`}
+      id={id}
       type="button"
-      onClick={changeFavoritesButton}
+      onClick={handleFavoritesButton}
     >
-      <svg className="place-card__bookmark-icon" width={width} height={height}>
+      <svg className={svgClassName} width={width} height={height}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">To bookmarks</span>

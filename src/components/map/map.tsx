@@ -8,7 +8,7 @@ import { CITIES_LOCATIONS } from '../../consts';
 import { useAppSelector } from '../../hooks';
 
 type TMapProps = {
-  offers: TOffer[];
+  offers: (TOffer | null)[];
   activeOfferId?: string | null;
   page: string;
   activeCity?: TCityName;
@@ -59,25 +59,28 @@ export function Map({
   }, [map, city, offerPlace]);
 
   useEffect(() => {
-    if (offers) {
+    if (offers.length) {
       if (map) {
         const markerLayer = layerGroup().addTo(map);
         offers.forEach((offer) => {
           leaflet
             .marker(
               {
-                lat: offer.location.latitude,
-                lng: offer.location.longitude,
+                lat: offer!.location.latitude,
+                lng: offer!.location.longitude,
               },
               {
                 icon:
-                  offer.id === activeOfferId
+                  offer!.id === activeOfferId
                     ? activeMarkerIcon
                     : defaultMarkerIcon,
               }
             )
             .addTo(markerLayer);
         });
+        return () => {
+          map.removeLayer(markerLayer);
+        };
       }
     }
   }, [activeOfferId, map, offers]);

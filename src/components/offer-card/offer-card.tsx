@@ -28,13 +28,42 @@ const OfferCard = ({
   } = offersData;
   const ratingPercent: string = `${Math.round(+rating) * 20}%`;
 
+  let cardClass;
+
+  if (page === 'favorites') {
+    cardClass = 'favorites__card place-card';
+  } else if (page === 'offer') {
+    cardClass = 'near-places__card place-card';
+  } else {
+    cardClass = 'cities__card place-card';
+  }
+
+  let imageWrapperClass;
+  if (page === 'favorites') {
+    imageWrapperClass = 'favorites__image-wrapper place-card__image-wrapper';
+  } else if (page === 'offer') {
+    imageWrapperClass = 'near-places__image-wrapper place-card__image-wrapper';
+  } else {
+    imageWrapperClass = 'cities__image-wrapper place-card__image-wrapper';
+  }
+
+  // const cardClass =
+  //   page === 'favorites'
+  //     ? 'favorites__card place-card'
+  //     : page === 'offer'
+  //       ? 'near-places__card place-card'
+  //       : 'cities__card place-card';
+
+  // const imageWrapperClass =
+  //   page === 'favorites'
+  //     ? 'favorites__image-wrapper place-card__image-wrapper'
+  //     : page === 'offer'
+  //       ? 'near-places__image-wrapper place-card__image-wrapper'
+  //       : 'cities__image-wrapper place-card__image-wrapper';
+
   return (
     <article
-      className={
-        page === 'favorites'
-          ? 'favorites__card place-card'
-          : 'cities__card place-card'
-      }
+      className={cardClass}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -43,13 +72,7 @@ const OfferCard = ({
           <span>Premium</span>
         </div>
       )}
-      <div
-        className={
-          page === 'favorites'
-            ? 'favorites__image-wrapper place-card__image-wrapper'
-            : 'cities__image-wrapper place-card__image-wrapper'
-        }
-      >
+      <div className={imageWrapperClass}>
         <Link to={`${AppRoute.Offer}/${offersData.id}`}>
           <img
             className="place-card__image"
@@ -64,7 +87,7 @@ const OfferCard = ({
         className={
           page === 'favorites'
             ? 'favorites__card-info place-card__info'
-            : 'place-card__info'
+            : 'place-card__info '
         }
       >
         <div className="place-card__price-wrapper">

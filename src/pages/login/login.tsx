@@ -23,8 +23,12 @@ function Login(): JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-
-    if (emailRef.current !== null && passwordRef.current !== null) {
+    const passCheck = /^(?=.*\d)(?=.*[a-z])/;
+    if (
+      emailRef.current !== null &&
+      passwordRef.current !== null &&
+      passCheck.test(passwordRef.current.value)
+    ) {
       dispatch(
         loginAction({
           email: emailRef.current.value,

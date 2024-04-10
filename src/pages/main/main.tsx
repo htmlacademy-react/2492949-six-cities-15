@@ -42,11 +42,11 @@ function Main(): JSX.Element {
             </ul>
           </section>
         </div>
-        {isOffersDataLoading && offers.length === 0 && <Spinner />}
-        {fetchStatus && offers.length !== 0 && (
+        {isOffersDataLoading && offers.length === 0 ? <Spinner /> : null}
+        {fetchStatus && cityOffers.length !== 0 ? (
           <OffersList offersData={cityOffers} activeCity={cityName} />
-        )}
-        {offers.length === 0 && fetchStatus === true ? <MainEmpty /> : null}
+        ) : null}
+        {cityOffers.length === 0 && fetchStatus === true ? <MainEmpty /> : null}
       </main>
     </div>
   );

@@ -19,6 +19,7 @@ function Offer(): JSX.Element {
   const fetchStatus = useAppSelector((state) => state.singleOffer.fetchStatus);
   const loadingFailed = useAppSelector((state) => state.singleOffer.isFailed);
   const threeOffersNearby = offersNearby.slice(0, 3);
+  const offersPlusCurrent = [currentOffer, ...threeOffersNearby];
 
   useEffect(() => {
     if (offerId) {
@@ -42,7 +43,7 @@ function Offer(): JSX.Element {
           {currentOffer && (
             <SingleOfferBlock
               currentOffer={currentOffer}
-              offersNearby={threeOffersNearby}
+              offersNearby={offersPlusCurrent}
             />
           )}
           <div className="container">
