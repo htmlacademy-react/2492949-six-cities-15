@@ -34,7 +34,7 @@ export function OffersBlock({
   return (
     <div
       className={
-        page === 'offers'
+        page === 'main'
           ? 'cities__places-list places__list tabs__content'
           : 'favorites__places'
       }

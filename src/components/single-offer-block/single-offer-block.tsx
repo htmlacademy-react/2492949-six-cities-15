@@ -5,7 +5,7 @@ import FavoritesButton from '../favorites-button/favorites-button';
 
 type TSingleOffer = {
   currentOffer: TOffer;
-  offersNearby: TOffer[];
+  offersNearby: (TOffer | null)[];
 };
 
 function SingleOfferBlock({

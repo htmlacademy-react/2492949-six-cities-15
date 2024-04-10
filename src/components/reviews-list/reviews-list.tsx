@@ -10,6 +10,7 @@ function ReviewsList({ reviews }: TReviewsProps): JSX.Element {
   const reviewsCount = useAppSelector(
     (state) => state.singleOffer.reviews
   ).length;
+
   return (
     <>
       <h2 className="reviews__title">

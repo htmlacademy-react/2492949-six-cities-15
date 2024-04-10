@@ -33,7 +33,7 @@ export function OffersList({
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">
-            {offersData.length} {offersData.length === 0 ? 'place' : 'places'}{' '}
+            {offersData.length} {offersData.length === 1 ? 'place' : 'places'}{' '}
             to stay in {activeCity}
           </b>
           <OffersSorting
@@ -44,7 +44,7 @@ export function OffersList({
             offers={sortedOffers}
             handleMouseEnter={handleMouseEnter}
             handleMouseLeave={handleMouseLeave}
-            page="offers"
+            page="main"
           />
         </section>
         <div className="cities__right-section">

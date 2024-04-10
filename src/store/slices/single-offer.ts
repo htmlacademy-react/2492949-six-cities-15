@@ -3,6 +3,7 @@ import { TOffer } from '../../types/offers';
 import { getOffer, getReviews, submitReview } from '../api-actions';
 import { getOffersNear } from '../api-actions';
 import { TReviews } from '../../types/reviews';
+import { fetchStatus } from '../../consts';
 
 type TSingleOfferState = {
   offer: TOffer | null;
@@ -12,6 +13,8 @@ type TSingleOfferState = {
   isFailed: boolean;
   isReviewPending: boolean;
   reviewFailed: boolean;
+
+  reviewSubmitStatus: fetchStatus | null;
 };
 
 const initialState: TSingleOfferState = {
@@ -22,6 +25,8 @@ const initialState: TSingleOfferState = {
   isFailed: false,
   isReviewPending: false,
   reviewFailed: false,
+
+  reviewSubmitStatus: null,
 };
 
 export const singleOfferSlice = createSlice({
@@ -46,13 +51,16 @@ export const singleOfferSlice = createSlice({
       })
       .addCase(submitReview.fulfilled, (state) => {
         state.isReviewPending = false;
+        state.reviewSubmitStatus = fetchStatus.fullfield;
       })
       .addCase(submitReview.rejected, (state) => {
-        state.isReviewPending = false;
         state.reviewFailed = true;
+        state.isReviewPending = false;
+        state.reviewSubmitStatus = fetchStatus.failed;
       })
       .addCase(submitReview.pending, (state) => {
         state.isReviewPending = true;
+        state.reviewSubmitStatus = fetchStatus.pending;
       });
   },
 });

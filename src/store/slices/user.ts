@@ -6,11 +6,13 @@ import { UserData } from '../../types/user-data';
 type TUserState = {
   authStatus: AuthorizationStatus;
   user: UserData | null;
+  isServerDataReceived: boolean;
 };
 
 const initialState: TUserState = {
   authStatus: AuthorizationStatus.NoAuth,
   user: null,
+  isServerDataReceived: false,
 };
 
 export const userSlice = createSlice({
@@ -22,9 +24,11 @@ export const userSlice = createSlice({
       .addCase(checkAuthAction.fulfilled, (state, action) => {
         state.authStatus = AuthorizationStatus.Auth;
         state.user = action.payload;
+        state.isServerDataReceived = true;
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.authStatus = AuthorizationStatus.NoAuth;
+        state.isServerDataReceived = true;
       })
       .addCase(loginAction.fulfilled, (state, action) => {
         state.authStatus = AuthorizationStatus.Auth;
@@ -35,6 +39,7 @@ export const userSlice = createSlice({
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authStatus = AuthorizationStatus.NoAuth;
+        state.user = null;
       });
   },
 });

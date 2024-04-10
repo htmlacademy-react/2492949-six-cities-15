@@ -108,6 +108,7 @@ export const setFavorites = createAsyncThunk<
     );
     dispatch(fetchFavorites());
     dispatch(fetchAllOffers());
+    dispatch(getOffer(id));
     return data;
   }
 );

@@ -20,6 +20,12 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum fetchStatus {
+  pending = 'pending',
+  fullfield = 'fullfield',
+  failed = 'failed',
+}
+
 export const CITIES = [
   'Paris',
   'Cologne',
@@ -126,7 +132,7 @@ export const URL_MARKER_ACTIVE = '/img/pin-active.svg';
 
 export const TIMEOUT_SHOW_ERROR = 2000;
 
-export const RATINGSTARS = [
+export const RATING_STARS = [
   { value: 5, label: 'perfect' },
   { value: 4, label: 'good' },
   { value: 3, label: 'not bad' },
