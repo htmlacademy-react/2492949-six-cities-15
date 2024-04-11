@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import { TOffer } from '../../types/offers';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { fetchFavorites } from '../api-actions';
-import { fetchStatus } from '../../consts';
+import { FetchStatus } from '../../consts';
 
 type TFavoritesState = {
   favoriteOffer: TOffer[] | [];
   favoriteOffers: TOffer[] | [];
-  fetchStatus: fetchStatus | null;
+  fetchStatus: FetchStatus | null;
 };
 
 const initialState: TFavoritesState = {
@@ -29,7 +29,7 @@ const favoritesSlice = createSlice({
       state.favoriteOffers = action.payload;
     });
     builder.addCase(fetchFavorites.pending, (state) => {
-      state.fetchStatus = fetchStatus.pending;
+      state.fetchStatus = FetchStatus.Pending;
     });
   },
 });

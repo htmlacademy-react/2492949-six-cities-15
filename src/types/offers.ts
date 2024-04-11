@@ -1,4 +1,4 @@
-import { PLACES, LivingTypes, CITIES } from '../consts';
+import { Place, LivingType, CITIES } from '../consts';
 
 export type TLocation = {
   latitude: number;
@@ -7,7 +7,7 @@ export type TLocation = {
 };
 
 export type TCity = {
-  name: keyof typeof PLACES;
+  name: keyof typeof Place;
   location: {
     latitude: number;
     longitude: number;
@@ -18,7 +18,7 @@ export type TCity = {
 export type TOffer = {
   id: string;
   title: string;
-  type: keyof typeof LivingTypes;
+  type: keyof typeof LivingType;
   price: number;
   city: TCity;
   location: TLocation;
