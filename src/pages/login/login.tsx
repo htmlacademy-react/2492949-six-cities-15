@@ -7,8 +7,9 @@ import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import Header from '../../components/header/header';
 import { useAppSelector } from '../../hooks';
-import { AuthorizationStatus } from '../../consts';
+import { AuthorizationStatus, CITIES } from '../../consts';
 import { Link } from 'react-router-dom';
+import { TCityName } from '../../types/offers';
 
 function Login(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -16,6 +17,12 @@ function Login(): JSX.Element {
 
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector((state) => state.user.authStatus);
+
+  function setRandomCity(): TCityName {
+    const randomNum = Math.floor(Math.random() * CITIES.length);
+    return CITIES[randomNum];
+  }
+  const randomCity = setRandomCity();
 
   if (authStatus === AuthorizationStatus.Auth) {
     return <Navigate to={AppRoute.Main} />;
@@ -89,7 +96,7 @@ function Login(): JSX.Element {
           <section className="locations locations--login locations--current">
             <div className="locations__item">
               <Link className="locations__item-link" to={AppRoute.Main}>
-                <span>Amsterdam</span>
+                <span>{randomCity}</span>
               </Link>
             </div>
           </section>

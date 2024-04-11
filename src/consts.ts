@@ -20,10 +20,10 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum fetchStatus {
-  pending = 'pending',
-  fullfield = 'fullfield',
-  failed = 'failed',
+export enum FetchStatus {
+  Pending = 'pending',
+  Fullfield = 'fullfield',
+  Failed = 'failed',
 }
 
 export const CITIES = [
@@ -35,7 +35,7 @@ export const CITIES = [
   'Dusseldorf',
 ];
 
-export const enum PLACES {
+export enum Place {
   Paris = 'Paris',
   Cologne = 'Cologne',
   Brussels = 'Brussels',
@@ -56,11 +56,11 @@ export type TCardInfo = {
 
 export const CARDS_COUNT = 5;
 
-export const enum LivingTypes {
-  apartment = 'apartment',
-  room = 'room',
-  house = 'house',
-  hotel = 'hotel',
+export enum LivingType {
+  Apartment = 'apartment',
+  Room = 'room',
+  House = 'house',
+  Hotel = 'hotel',
 }
 
 export const OfferInsideItems = [

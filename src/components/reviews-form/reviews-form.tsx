@@ -4,7 +4,7 @@ import { getReviews, submitReview } from '../../store/api-actions';
 import { FormEvent } from 'react';
 import { ChangeEvent } from 'react';
 import ReviewsFormRating from '../review-form-rating/review-form-rating';
-import { RATING_STARS, fetchStatus } from '../../consts';
+import { RATING_STARS, FetchStatus } from '../../consts';
 import { useRef } from 'react';
 
 type TReviewsForm = {
@@ -52,13 +52,13 @@ function ReviewsForm({ id }: TReviewsForm): JSX.Element {
 
   useEffect(() => {
     if (
-      reviewSubmitStatus === fetchStatus.fullfield &&
+      reviewSubmitStatus === FetchStatus.Fullfield &&
       reviewForm.current !== null
     ) {
       reviewForm.current.reset();
       setReview({ comment: '', rating: 0 });
     }
-    if (reviewSubmitStatus === fetchStatus.fullfield) {
+    if (reviewSubmitStatus === FetchStatus.Fullfield) {
       dispatch(getReviews(id));
     }
   }, [dispatch, id, reviewSubmitStatus, isReviewSubmitted]);
